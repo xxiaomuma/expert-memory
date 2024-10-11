@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: auth-service
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+
+---
+spring:
+  profiles:
+    active: dev
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 8.138.87.223:8848
+        namespace: ${spring.profiles.active}
+      config:
+        server-addr: 8.138.87.223:8848
+        file-extension: yaml
+        namespace: ${spring.profiles.active}
+---
+spring:
+  profiles:
+    active: test
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 8.138.87.223:8848
+        namespace: ${spring.profiles.active}
+      config:
+        server-addr: 8.138.87.223:8848
+        file-extension: yaml
+        namespace: ${spring.profiles.active}
